@@ -1,4 +1,6 @@
 originalSync = Backbone.sync
+originalModel = Backbone.Model.prototype.constructor
+originalCollection = Backbone.Model.prototype.constructor
 
 Backbone.sync = (method, model, options) ->
   socket = model.socket or model.collection?.socket
@@ -28,17 +30,17 @@ Backbone.sync = (method, model, options) ->
   return
   
 
-@SocketIOModel = Backbone.Model.extend
+Backbone.Model = Backbone.Model.extend
   constructor: (attributes, options) ->
     @socket = attributes?.socket
     delete attributes.socket
-    Backbone.Model.prototype.constructor.apply(this, arguments)
+    originalModel.apply(this, arguments)
     return
 
 
-@SocketIOCollection = Backbone.Collection.extend
+Backbone.Collection = Backbone.Collection.extend
   constructor: (attributes, options) ->
     @socket = attributes?.socket
     delete attributes.socket
-    Backbone.Collection.prototype.constructor.apply(this, arguments)
+    originalCollection.apply(this, arguments)
     return
