@@ -6,7 +6,9 @@ Backbone.sync = (method, model, options) ->
   socket = model.socket or model.collection?.socket
   
   # Apply original sync if no valid socket defined
-  originalSync.apply(this, arguments) unless socket
+  unless socket
+    originalSync.apply(this, arguments)
+    return
 
   # Strip callbacks
   success = options.success
