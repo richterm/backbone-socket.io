@@ -12,7 +12,7 @@
     var error, socket, success, _ref;
     socket = model.socket || ((_ref = model.collection) != null ? _ref.socket : void 0);
     if (!socket) {
-      originalSync.apply(this, arguments);
+      return originalSync.apply(this, arguments);
     }
     success = options.success;
     delete options.success;
