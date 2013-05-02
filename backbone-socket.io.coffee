@@ -32,15 +32,15 @@ Backbone.sync = (method, model, options) ->
 
 Backbone.Model = Backbone.Model.extend
   constructor: (attributes, options) ->
-    @socket = attributes?.socket
-    delete attributes.socket
+    @socket = options?.socket
+    delete options.socket
     originalModel.apply(this, arguments)
     return
 
 
 Backbone.Collection = Backbone.Collection.extend
   constructor: (attributes, options) ->
-    @socket = attributes?.socket
-    delete attributes.socket
+    @socket = options?.socket
+    delete options.socket
     originalCollection.apply(this, arguments)
     return
